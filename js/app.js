@@ -4,6 +4,7 @@ var Enemy = function() {
     // we've provided one for you to get started
     this.generateInitialPosistion();
     this.speed = this.getSpeed();
+    this.score = 0;
 
     // The image/sprite for our enemies, this uses
     // a helper we've provided to easily load images
@@ -41,7 +42,7 @@ Enemy.prototype.generateNewEnemyPosition = function () {
 };
 
 Enemy.prototype.getSpeed = function(){
-    return 100 * Math.random(10 - 5) + 5;
+    return 400 * Math.random(80 - 30) + 30;
 };
 
 Enemy.prototype.attackedPlayerSuccessfully = function() {
@@ -59,32 +60,29 @@ var Player = function () {
     this.y = 460;
     this.x = 220;
     this.survive = true;
+    this.score = 0;
 };
 
 Player.prototype.update = function() {
 
     if (! player.survive) {
         alert('die');
+        // console.log(allEnemies);
+        allEnemies.forEach(function(enemy) {
+            enemy.score++;
+            enemy.generateInitialPosistion();
+        });
+        document.getElementById("cam-score").innerHTML = allEnemies[0].score;
         player.reset();
-        player.survive = true;
     }
 
 };
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-    // allEnemies.forEach(function(enemy, index, enemies) {
-    //     if (enemy.attackedPlayerSuccessfully()) {
-    //         alert('die');
-    //         player.reset();
-    //         player.survive = true;
-    //     }
-    // });
-
 };
 
 Player.prototype.handleInput = function (inputKeyCode) {
     switch(inputKeyCode){
-
         case 'left':
         if (this.x - 100 >= 0) {
             this.x = this.x - 100;
@@ -93,8 +91,11 @@ Player.prototype.handleInput = function (inputKeyCode) {
         case 'up':
         if (this.y - 83 > 100) {
             this.y = this.y - 83;
-        } else {
+        } else if (player.win()) {
             alert('success');
+            player.score ++;
+            document.getElementById("player-score").innerHTML = player.score;
+            player.reset();
         }
         break;
         case 'right':
@@ -113,16 +114,32 @@ Player.prototype.handleInput = function (inputKeyCode) {
 Player.prototype.reset = function () {
     this.y = 460;
     this.x = 220;
+    this.survive = true;
 };
 
+Player.prototype.win = function() {
+    if (player.x > princess.x - 20 && player.x < princess.x + 20) {
+        return true;
+    }
+    return false;
+}
 
+var Princess = function () {
+    this.x = 215;
+    this.y = 20;
+    this.sprite = "images/char-princess-girl.png";
+};
+
+Princess.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-var allEnemies = [new Enemy()];
+var allEnemies = [new Enemy(), new Enemy(), new Enemy(), new Enemy(), new Enemy()];
 var player = new Player();
-
+var princess = new Princess();
 
 
 

@@ -152,6 +152,7 @@ var Engine = (function(global) {
         });
 
         player.render();
+        princess.render();
     }
 
     /* This function does nothing but it could have been a good place to
@@ -163,7 +164,7 @@ var Engine = (function(global) {
     }
 
     function checkCollisions() {
-        allEnemies.forEach(function(enemy, index, enemies) {
+        allEnemies.forEach(function(enemy) {
             if (enemy.attackedPlayerSuccessfully()) {
                 player.survive = false;
             }
@@ -180,7 +181,7 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/char-princess-girl.png',
+        'images/char-princess-girl.png'
     ]);
     Resources.onReady(init);
 

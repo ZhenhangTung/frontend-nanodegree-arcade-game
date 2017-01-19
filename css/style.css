@@ -1,3 +1,38 @@
 body {
     text-align: center;
 }
+
+body {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box; /* Firefox */
+	-webkit-box-sizing: border-box; /* Safari */
+}
+
+.players, .score {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.score {
+	margin: 20px;
+}
+
+.player-score, .cam-score {
+	margin: 0px 90px;
+	font-size: 20px;
+}
+
+.vs {
+	font-size: 30px;
+}
+
+img {
+	margin: 0px 30px;
+}
+
+.footer {
+	text-align: left;
+	margin-left: 20px;
+}
+

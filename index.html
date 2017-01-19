@@ -3,11 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <title>Effective JavaScript: Frogger</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
     <script src="js/resources.js"></script>
     <script src="js/app.js"></script>
     <script src="js/engine.js"></script>
+    <div class="scoreboard">
+    	<div class="players">
+    		<img src="images/Shiba.jpg" height="100" width="100" alt="player-dog">
+	    	<div class = "vs">VS</div>
+			<img src="images/cameronpittman.jpg" height="100" width="100" alt="player-cameron">
+    	</div>
+    	<div class="score">
+    		<div class="player-score" id="player-score">0</div>
+			<div class="cam-score" id="cam-score">0</div>
+   		</div>
+    </div>
+  	<div class="modal fade" id="gameBackground" tabindex="-1" role="dialog" aria-labelledby="backgroundTitle" aria-hidden="true">
+	    <div class="modal-dialog" role="document">
+	    	<div class="modal-content">
+		        <div class="modal-header">
+		        	<h1 class="modal-title" id="backgroundTitle">Your Job</h1>
+		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		            <span aria-hidden="true">&times;</span>
+		        	</button>
+		        </div>
+		        <div class="modal-body">
+					<p>
+						There is a mysterious city called Udacity. According to rumors, there lives a very beautiful princess.
+					</p>
+		        	<img src="images/CamP-Start.png" alt="intro-picture">
+		        </div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Start</button>
+				</div>
+	      	</div>
+	    </div>
+	</div>
+	<hr>
+	<footer class="footer">
+		&#9400;
+		<ul>
+			<li>Dog: <a href="https://news.gamme.com.tw/1372717">Gamme</a></li>
+			<li>Cameron: <a href="http://blog.udacity.com/2015/03/3-web-developers-built-careers-scratch-part-two-cameron-pittman.html">Udacity</a></li>
+		</ul>
+	</footer>
+	<script type="text/javascript">
+		$(window).on('load', function() {
+			$('#gameBackground').modal('show');
+		});
+	</script>
 </body>
 </html>
