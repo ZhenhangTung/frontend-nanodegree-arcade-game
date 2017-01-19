@@ -80,7 +80,7 @@ var Engine = (function(global) {
      */
     function update(dt) {
         updateEntities(dt);
-        // checkCollisions();
+        checkCollisions();
     }
 
     /* This is called by the update function and loops through all of the
@@ -162,6 +162,14 @@ var Engine = (function(global) {
         // noop
     }
 
+    function checkCollisions() {
+        allEnemies.forEach(function(enemy, index, enemies) {
+            if (enemy.attackedPlayerSuccessfully()) {
+                player.survive = false;
+            }
+        });
+    }
+
     /* Go ahead and load all of the images we know we're going to need to
      * draw our game level. Then set init as the callback method, so that when
      * all of these images are properly loaded our game will start.
@@ -171,7 +179,8 @@ var Engine = (function(global) {
         'images/water-block.png',
         'images/grass-block.png',
         'images/enemy-bug.png',
-        'images/char-boy.png'
+        'images/char-boy.png',
+        'images/char-princess-girl.png',
     ]);
     Resources.onReady(init);
 

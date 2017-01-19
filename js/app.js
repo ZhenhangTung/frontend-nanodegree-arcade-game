@@ -3,10 +3,6 @@ var Enemy = function() {
     // Variables applied to each of our instances go here,
     // we've provided one for you to get started
     this.generateInitialPosistion();
-    // this.x = 0;
-    // this.y = 0;
-    // this.speed = 0;
-    // Math.random() * (230 - 42) + 42;
     this.speed = this.getSpeed();
 
     // The image/sprite for our enemies, this uses
@@ -25,9 +21,6 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 600){
         this.generateNewEnemyPosition();
     }
-    if (this.attackedPlayerSuccessfully()) {
-
-    }
 };
 
 // Draw the enemy on the screen, required method for game
@@ -37,68 +30,59 @@ Enemy.prototype.render = function() {
 
 Enemy.prototype.generateInitialPosistion = function() {
     this.x = 300 * Math.random();
-    this.y = Math.random() * (230 - 42) + 42;
+    this.y = Math.random() * (300 - 100) + 100;
     this.speed = this.getSpeed();
-}
+};
+
 Enemy.prototype.generateNewEnemyPosition = function () {
     this.x = 0;
-    this.y = Math.random() * (230 - 42) + 42;
+    this.y = Math.random() * (300 - 100) + 100;
     this.speed = this.getSpeed();
-}
+};
 
 Enemy.prototype.getSpeed = function(){
     return 100 * Math.random(10 - 5) + 5;
-}
+};
 
 Enemy.prototype.attackedPlayerSuccessfully = function() {
-    // this.x + 101 > player.x;
-    // this.y > player.y && this.y < player.y + 171;
-    // if (this.x + 101 > player.x && ) {
-    //     console.log('x>>');
-    // }
-    // 
-    // if (this.y + 50 > player.y &&  this.y < player.y + 100) {
-    //         console.log(this.y, player.y);
-    // }
-    if ((player.y < this.y + 100 && player.y > this.y + 20)) {
-        console.log(this.y, player.y);
+    if (this.y + 30 > player.y && this.y < player.y + 68 && this.x + 101 > player.x && this.x < player.x + 76) {
+        return true;
     }
     return false;
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
 var Player = function () {
     this.sprite = 'images/char-boy.png';
-    this.y = 380;
-    this.x = 200;
+    this.y = 460;
+    this.x = 220;
+    this.survive = true;
 };
 
-// Player.prototype = Object.create(Enemy.prototype);
 Player.prototype.update = function() {
-    if (this.y < 100) {
-        // console.log("success");
+
+    if (! player.survive) {
+        alert('die');
+        player.reset();
+        player.survive = true;
     }
 
 };
 Player.prototype.render = function() {
-    // console.log(this.x);
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+    // allEnemies.forEach(function(enemy, index, enemies) {
+    //     if (enemy.attackedPlayerSuccessfully()) {
+    //         alert('die');
+    //         player.reset();
+    //         player.survive = true;
+    //     }
+    // });
+
 };
 
 Player.prototype.handleInput = function (inputKeyCode) {
-    // switch(inputKeyCode) {
-    //     case 'up':
-
-    //     player.x = player.x + 100 * dt;
-    //     player.render();
-    //     console.log(player.x);
-    // }
-    // console.log(inputKeyCode);
-    // if (this.x === 0 || this.x === 500 || this.y === 0 || this.y === 600) {
-    //     return;
-    // }
     switch(inputKeyCode){
 
         case 'left':
@@ -107,10 +91,11 @@ Player.prototype.handleInput = function (inputKeyCode) {
         }
         break;
         case 'up':
-        if (this.y - 83 > 0) {
+        if (this.y - 83 > 100) {
             this.y = this.y - 83;
+        } else {
+            alert('success');
         }
-        // console.log(this.y);
         break;
         case 'right':
         if (this.x + 100 < 500) {
@@ -118,12 +103,16 @@ Player.prototype.handleInput = function (inputKeyCode) {
         }
         break;
         case 'down':
-        if (this.y + 83 < 400) {
+        if (this.y + 83 < 500) {
             this.y = this.y + 83;
         }
         break;
-
     }
+};
+
+Player.prototype.reset = function () {
+    this.y = 460;
+    this.x = 220;
 };
 
 
