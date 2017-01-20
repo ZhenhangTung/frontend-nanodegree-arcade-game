@@ -181,7 +181,13 @@ var Engine = (function(global) {
         'images/grass-block.png',
         'images/enemy-bug.png',
         'images/char-boy.png',
-        'images/char-princess-girl.png'
+        'images/char-princess-girl.png',
+        'images/pikachu.png',
+        'images/snorlax.png',
+        'images/pidgey.png',
+        'images/jigglypuff.png',
+        'images/psyduck.png',
+        'images/eevee.png',
     ]);
     Resources.onReady(init);
 

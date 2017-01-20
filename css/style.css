@@ -18,7 +18,7 @@ body {
 	margin: 20px;
 }
 
-.player-score, .cam-score {
+.player-score, .enemy-score {
 	margin: 0px 90px;
 	font-size: 20px;
 }
@@ -34,5 +34,30 @@ img {
 .footer {
 	text-align: left;
 	margin-left: 20px;
+	font-size: 10px;
+}
+
+.counter {
+	display: flex;
+	justify-content: center;
+	margin-bottom: 30px;
+}
+.start-button, .replay-button {
+	margin-left: 15px;
+	margin-bottom: 30px;
+	justify-content: center;
+}
+
+.button-image {
+	width: 150px;
+	height: 150px;
+}
+
+.button-image:hover {background-color: white}
+
+.button-image:active {
+  background-color: white;
+  box-shadow: 0 5px white;
+  transform: translateY(4px);
 }
 
