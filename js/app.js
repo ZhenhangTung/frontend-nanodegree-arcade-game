@@ -29,22 +29,26 @@ Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Generate every enemy's initial position
 Enemy.prototype.generateInitialPosistion = function() {
     this.x = 300 * Math.random();
     this.y = Math.random() * (300 - 100) + 100;
     this.speed = this.getSpeed();
 };
 
+// Generate new enemy's initial position after old one is off the screen
 Enemy.prototype.generateNewEnemyPosition = function () {
     this.x = 0;
     this.y = Math.random() * (270 - 100) + 100;
     this.speed = this.getSpeed();
 };
 
+// Get speed for enemy
 Enemy.prototype.getSpeed = function(){
     return 400 * Math.random(80 - 30) + 30;
 };
 
+// Check enemy's collision
 Enemy.prototype.attackedPlayerSuccessfully = function() {
     if (this.y + 80 > player.y && this.y < player.y + 90 && this.x + 80 > player.x && this.x < player.x + 90) {
         return true;
@@ -63,6 +67,8 @@ var Player = function () {
     this.score = 0;
 };
 
+// Update the player's position, required method for game
+// Parameter: dt, a time delta between ticks
 Player.prototype.update = function() {
     if (! player.survive) {
         player.lose();
@@ -70,10 +76,14 @@ Player.prototype.update = function() {
         $('#losing-game').modal('show');
     }
 };
+
+// Draw the player
 Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Control player's movement
+// Parameter: inputKeyCode, your keyboard input
 Player.prototype.handleInput = function (inputKeyCode) {
     switch(inputKeyCode){
         case 'left':
@@ -103,12 +113,14 @@ Player.prototype.handleInput = function (inputKeyCode) {
     }
 };
 
+// Reset player to initial position
 Player.prototype.reset = function () {
     this.y = 460;
     this.x = 210;
     this.survive = true;
 };
 
+// Player reached the target
 Player.prototype.reachedTheGoal = function() {
     if (player.x > princess.x - 20 && player.x < princess.x + 20 && player.y < 150) {
         return true;
@@ -143,6 +155,7 @@ Player.prototype.timeout = function() {
     clock.resetGame();
 };
 
+// Player's target
 var BatteleTarget = function () {
     this.x = 210;
     this.y = 45;
@@ -157,6 +170,7 @@ var Game = function() {
 
 };
 
+// Different game level generates differnt amount of enemy
 Game.prototype.createEnemyBasedOnGameLevel = function(gameLevel) {
     switch(gameLevel) {
         case 'easy':
