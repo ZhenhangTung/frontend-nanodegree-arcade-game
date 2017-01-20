@@ -67,15 +67,16 @@
 		        	</button>
 		        </div>
 		        <div class="modal-body">
+		        	<h3>Choose A Game Level</h3>
 		        	<img src="images/yaoming.jpg" alt="picture-on-chosing-level-page">
-					<div>
-						<input type="radio" name="level" value="easy">Easy
+					<div class="level-choice">
+						<input type="radio" name="level" value="easy" class="level-choice-item">Easy
 						<br>
-						<input type="radio" name="level" value="nomal" checked>Normal
+						<input type="radio" name="level" value="nomal" class="level-choice-item" checked>Normal
 						<br>
-						<input type="radio" name="level" value="hard">Hard
+						<input type="radio" name="level" value="hard" class="level-choice-item">Hard
 						<br>
-						<input type="radio" name="level" value="hell">Hell
+						<input type="radio" name="level" value="hell" class="level-choice-item">Hell
 					</div>
 		        </div>
 				<div class="modal-footer">
@@ -88,24 +89,20 @@
 	    <div class="modal-dialog" role="document">
 	    	<div class="modal-content">
 		        <div class="modal-header">
-		        	<h1 class="modal-title" id="winning-title">Goctha!</h1>
+		        	<h1 class="modal-title" id="winning-title">Go Pikachu!!!</h1>
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		            <span aria-hidden="true">&times;</span>
 		        	</button>
 		        </div>
 		        <div class="modal-body">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+		        	<p>Boom!!!</p>
+		        	<img src="images/Cam-Wow.jpeg" alt="Winning Talk">
+		        	<p>
+						You are lucky! Let me buy you a drink tomorrow.
 					</p>
-		        	<img src="images/CamP-Start.png" alt="intro-picture">
 		        </div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Start</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">Coca Cola, thanks!</button>
 				</div>
 	      	</div>
 	    </div>
@@ -114,24 +111,19 @@
 	    <div class="modal-dialog" role="document">
 	    	<div class="modal-content">
 		        <div class="modal-header">
-		        	<h1 class="modal-title" id="losing-title">Sorry!</h1>
+		        	<h1 class="modal-title" id="losing-title">You Lose!!!</h1>
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		            <span aria-hidden="true">&times;</span>
 		        	</button>
 		        </div>
 		        <div class="modal-body">
 					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+						Cam: You could get to the restroom, I can wait.
 					</p>
-		        	<img src="images/CamP-Start.png" alt="intro-picture">
+		        	<img src="images/Cam-Glass.jpeg" alt="Losing Talk">
 		        </div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Start</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">After beat you down!</button>
 				</div>
 	      	</div>
 	    </div>
@@ -140,24 +132,19 @@
 	    <div class="modal-dialog" role="document">
 	    	<div class="modal-content">
 		        <div class="modal-header">
-		        	<h1 class="modal-title" id="game-timeout-title">Timeout!</h1>
+		        	<h1 class="modal-title" id="game-timeout-title">Timeout!!!</h1>
 		        	<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 		            <span aria-hidden="true">&times;</span>
 		        	</button>
 		        </div>
 		        <div class="modal-body">
-					<p>
-						Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-						tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-						quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-						consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-						cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-						proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-					</p>
-		        	<img src="images/CamP-Start.png" alt="intro-picture">
+		        	<p>You: What?</p>
+		        	<img src="images/chenglong.jpg" alt="intro-picture">
+		        	<p>Cam: I think you should get some sleep, my little boy.</p>
+		        	<p><img src="images/Cam-Loving-Dog.jpeg" alt="time out talking"></p>
 		        </div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Start</button>
+					<button type="button" class="btn btn-primary" data-dismiss="modal">No!</button>
 				</div>
 	      	</div>
 	    </div>
@@ -181,7 +168,7 @@
 			});
 			$('#level-button').click(function(e) {
 				var gameLevel = $('input[name="level"]:checked').val();
-				console.log(Engine);
+				game.createEnemyBasedOnGameLevel(gameLevel);
 			});
 			$('.counter').css('display', 'none');
 			$('.replay-button').css('display', 'none');

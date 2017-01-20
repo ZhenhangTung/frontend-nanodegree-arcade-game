@@ -188,6 +188,10 @@ var Engine = (function(global) {
         'images/jigglypuff.png',
         'images/psyduck.png',
         'images/eevee.png',
+        'images/abra.png',
+        'images/charmander.png',
+        'images/dratini.png',
+        'images/mew.png',
     ]);
     Resources.onReady(init);
 

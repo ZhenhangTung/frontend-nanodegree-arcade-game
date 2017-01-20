@@ -37,7 +37,7 @@ Enemy.prototype.generateInitialPosistion = function() {
 
 Enemy.prototype.generateNewEnemyPosition = function () {
     this.x = 0;
-    this.y = Math.random() * (300 - 100) + 100;
+    this.y = Math.random() * (270 - 100) + 100;
     this.speed = this.getSpeed();
 };
 
@@ -66,6 +66,7 @@ var Player = function () {
 Player.prototype.update = function() {
     if (! player.survive) {
         player.lose();
+        clock.resetGame();
         $('#losing-game').modal('show');
     }
 };
@@ -86,6 +87,7 @@ Player.prototype.handleInput = function (inputKeyCode) {
         } else if (player.reachedTheGoal()) {
             player.win();
             $('#winning-game').modal('show');
+            clock.resetGame();
         }
         break;
         case 'right':
@@ -151,24 +153,39 @@ BatteleTarget.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+var Game = function() {
+
+};
+
+Game.prototype.createEnemyBasedOnGameLevel = function(gameLevel) {
+    switch(gameLevel) {
+        case 'easy':
+        allEnemies = [new Enemy('images/pidgey.png')];
+        break;
+        case 'nomal':
+        console.log(222);
+        allEnemies = [new Enemy('images/jigglypuff.png'), new Enemy('images/pidgey.png'), new Enemy('images/psyduck.png')];
+        // console.log(allEnemies);
+        break;
+        allEnemies = [new Enemy('images/jigglypuff.png'), new Enemy('images/pidgey.png'), new Enemy('images/psyduck.png'), new Enemy('images/eevee.png'), new Enemy('images/charmander.png'),];
+        break;
+        case 'hell':
+        allEnemies = [new Enemy('images/jigglypuff.png'), new Enemy('images/pidgey.png'), new Enemy('images/psyduck.png'), new Enemy('images/eevee.png'), new Enemy('images/charmander.png'), new Enemy('images/dratini.png'), new Enemy('images/mew.png'), new Enemy('images/abra.png')];
+        break;
+        
+    }
+};
+
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
 // Place the player object in a variable called player
-// switch(gameLevel) {
-//     case 'easy':
-//     var allEnemies = [new Enemy('images/pidgey.png')];
-//     break;
-//     case 'nomal':
-//     var allEnemies = [new Enemy('images/jigglypuff.png'), new Enemy('images/pidgey.png'), new Enemy('images/psyduck.png')];
-//     break;
-//     case 'hard':
-//     var allEnemies = [new Enemy('images/jigglypuff.png'), new Enemy('images/pidgey.png'), new Enemy('images/psyduck.png'), new Enemy('images/eevee.png')];
-//     break;
-// }
 
-var allEnemies = [new Enemy('images/pidgey.png')];
+
+// var allEnemies = [new Enemy('images/pidgey.png')];
+var allEnemies = [];
 var player = new Player();
 var princess = new BatteleTarget();
+var game = new Game();
 
 
 
