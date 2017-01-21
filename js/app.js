@@ -1,3 +1,12 @@
+var Character = function() {
+
+};
+
+//Draw the character on the screen, required method for game
+Character.prototype.render = function() {
+    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
+};
+
 // Enemies our player must avoid
 var Enemy = function(sprite) {
     // Variables applied to each of our instances go here,
@@ -11,6 +20,7 @@ var Enemy = function(sprite) {
     this.sprite = sprite;
 
 };
+Enemy.prototype = Object.create(Character.prototype);
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -22,11 +32,6 @@ Enemy.prototype.update = function(dt) {
     if (this.x > 600){
         this.generateNewEnemyPosition();
     }
-};
-
-// Draw the enemy on the screen, required method for game
-Enemy.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Generate every enemy's initial position
@@ -67,19 +72,15 @@ var Player = function () {
     this.score = 0;
 };
 
+Player.prototype = Object.create(Character.prototype);
+
 // Update the player's position, required method for game
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function() {
     if (! this.survive) {
         this.lose();
-        clock.resetGame();
         $('#losing-game').modal('show');
     }
-};
-
-// Draw the player
-Player.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
 // Control player's movement
@@ -87,27 +88,26 @@ Player.prototype.render = function() {
 Player.prototype.handleInput = function (inputKeyCode) {
     switch(inputKeyCode){
         case 'left':
-        if (this.x - 100 >= 0) {
-            this.x = this.x - 100;
+        if (this.x - TILE_WIDTH >= MIN_BORDER_X) {
+            this.x = this.x - TILE_WIDTH;
         }
         break;
         case 'up':
-        if (this.y - 83 > 100) {
-            this.y = this.y - 83;
+        if (this.y - TILE_HEIGHT > MIN_BORDER_Y) {
+            this.y = this.y - TILE_HEIGHT;
         } else if (this.reachedTheGoal()) {
             this.win();
             $('#winning-game').modal('show');
-            clock.resetGame();
         }
         break;
         case 'right':
-        if (this.x + 100 < 500) {
-            this.x = this.x + 100;
+        if (this.x + TILE_WIDTH < MAX_BORDER_X) {
+            this.x = this.x + TILE_WIDTH;
         }
         break;
         case 'down':
-        if (this.y + 83 < 500) {
-            this.y = this.y + 83;
+        if (this.y + TILE_HEIGHT < MAX_BORDER_Y) {
+            this.y = this.y + TILE_HEIGHT;
         }
         break;
     }
@@ -129,6 +129,7 @@ Player.prototype.reachedTheGoal = function() {
 };
 
 Player.prototype.win = function() {
+    game.start = false;
     this.score ++;
     document.getElementById("player-score").innerHTML = this.score;
     this.reset();
@@ -136,6 +137,7 @@ Player.prototype.win = function() {
 };
 
 Player.prototype.lose = function() {
+    game.start = false;
     allEnemies.forEach(function(enemy) {
         enemy.score++;
         enemy.generateInitialPosistion();
@@ -146,6 +148,7 @@ Player.prototype.lose = function() {
 };
 
 Player.prototype.timeout = function() {
+    game.start = false;
     allEnemies.forEach(function(enemy) {
         enemy.score++;
         enemy.generateInitialPosistion();
@@ -162,12 +165,10 @@ var BatteleTarget = function () {
     this.sprite = "images/snorlax.png";
 };
 
-BatteleTarget.prototype.render = function() {
-    ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-};
+BatteleTarget.prototype = Object.create(Character.prototype);
 
 var Game = function() {
-
+    this.start = false;
 };
 
 // Different game level generates differnt amount of enemy
@@ -201,6 +202,12 @@ var player = new Player();
 var princess = new BatteleTarget();
 var game = new Game();
 
+var TILE_WIDTH = 101,
+    TILE_HEIGHT = 83,
+    MIN_BORDER_X = 0,
+    MAX_BORDER_X = 500,
+    MIN_BORDER_Y = 100,
+    MAX_BORDER_Y = 500;
 
 
 // This listens for key presses and sends the keys to your

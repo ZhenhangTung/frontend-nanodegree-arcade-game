@@ -181,7 +181,7 @@
 			countdown: true,
 			callbacks: {
 				stop: function() {
-					if (! player.win()) {
+					if (! player.win() && game.start) {
 						player.timeout();
 						$('#game-timeout').modal('show');
 					}
@@ -190,17 +190,23 @@
 		});
 		clock.resetGame = function () {
 			$('.counter').css('display', 'none');
-			clock.setTime(10);
+			// clock.setTime(10);
+			// clock.stop();
+			// console.log('ooo');
 			$(".replay-button").css('display', 'flex');
 		};
 		$("#start-button-image").click(function(e) {
 			$('.counter').css('display', 'flex');
 			$(".start-button").css('display', 'none');
+			game.start = true;
+			clock.setTime(10);
 			clock.start();
 		});
 		$("#replay-button-image").click(function(e) {
 			$('.counter').css('display', 'flex');
 			$(".replay-button").css('display', 'none');
+			game.start = true;
+			clock.setTime(10);
 			clock.start();
 		});
 	</script>
