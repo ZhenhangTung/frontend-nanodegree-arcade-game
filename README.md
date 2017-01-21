@@ -6,7 +6,11 @@ You could choose different game difficulty, but you will always get 10 seconds t
 
 You use keyboard 'up' 'down' 'left' and 'right' to control your Pockemon to avoid all attack and reach your rival's Pockemon.
 
+There is a scoreboard to record your score.
+
 Click the Pockemon ball to start your game. Go!
+
+# 
 
 # Targets needed to be finished
 * Make pages more beautiful

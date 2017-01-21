@@ -181,7 +181,7 @@
 			countdown: true,
 			callbacks: {
 				stop: function() {
-					if (! player.win() && game.start) {
+					if (! player.win() && ! game.start) {
 						player.timeout();
 						$('#game-timeout').modal('show');
 					}
