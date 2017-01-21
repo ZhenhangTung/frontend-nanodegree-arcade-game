@@ -70,8 +70,8 @@ var Player = function () {
 // Update the player's position, required method for game
 // Parameter: dt, a time delta between ticks
 Player.prototype.update = function() {
-    if (! player.survive) {
-        player.lose();
+    if (! this.survive) {
+        this.lose();
         clock.resetGame();
         $('#losing-game').modal('show');
     }
@@ -94,8 +94,8 @@ Player.prototype.handleInput = function (inputKeyCode) {
         case 'up':
         if (this.y - 83 > 100) {
             this.y = this.y - 83;
-        } else if (player.reachedTheGoal()) {
-            player.win();
+        } else if (this.reachedTheGoal()) {
+            this.win();
             $('#winning-game').modal('show');
             clock.resetGame();
         }
@@ -122,16 +122,16 @@ Player.prototype.reset = function () {
 
 // Player reached the target
 Player.prototype.reachedTheGoal = function() {
-    if (player.x > princess.x - 20 && player.x < princess.x + 20 && player.y < 150) {
+    if (this.x > princess.x - 20 && this.x < princess.x + 20 && this.y < 150) {
         return true;
     }
     return false;
 };
 
 Player.prototype.win = function() {
-    player.score ++;
-    document.getElementById("player-score").innerHTML = player.score;
-    player.reset();
+    this.score ++;
+    document.getElementById("player-score").innerHTML = this.score;
+    this.reset();
     clock.resetGame();
 };
 
@@ -141,7 +141,7 @@ Player.prototype.lose = function() {
         enemy.generateInitialPosistion();
     });
     document.getElementById("enemy-score").innerHTML = allEnemies[0].score;
-    player.reset();
+    this.reset();
     clock.resetGame();
 };
 
@@ -151,7 +151,7 @@ Player.prototype.timeout = function() {
         enemy.generateInitialPosistion();
     });
     document.getElementById("enemy-score").innerHTML = allEnemies[0].score;
-    player.reset();
+    this.reset();
     clock.resetGame();
 };
 
