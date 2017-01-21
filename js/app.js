@@ -79,6 +79,8 @@ Player.prototype = Object.create(Character.prototype);
 Player.prototype.update = function() {
     if (! this.survive) {
         this.lose();
+        game.addEnemyScore();
+        game.start = false;
         $('#losing-game').modal('show');
     }
 };
@@ -97,6 +99,8 @@ Player.prototype.handleInput = function (inputKeyCode) {
             this.y = this.y - TILE_HEIGHT;
         } else if (this.reachedTheGoal()) {
             this.win();
+            game.addPlayerScore();
+            game.start = false;
             $('#winning-game').modal('show');
         }
         break;
@@ -129,31 +133,23 @@ Player.prototype.reachedTheGoal = function() {
 };
 
 Player.prototype.win = function() {
-    game.start = false;
-    this.score ++;
-    document.getElementById("player-score").innerHTML = this.score;
     this.reset();
     clock.resetGame();
 };
 
+
+
 Player.prototype.lose = function() {
-    game.start = false;
-    allEnemies.forEach(function(enemy) {
-        enemy.score++;
-        enemy.generateInitialPosistion();
-    });
-    document.getElementById("enemy-score").innerHTML = allEnemies[0].score;
     this.reset();
     clock.resetGame();
 };
 
 Player.prototype.timeout = function() {
-    game.start = false;
-    allEnemies.forEach(function(enemy) {
-        enemy.score++;
-        enemy.generateInitialPosistion();
-    });
-    document.getElementById("enemy-score").innerHTML = allEnemies[0].score;
+    // allEnemies.forEach(function(enemy) {
+    //     enemy.score++;
+    //     enemy.generateInitialPosistion();
+    // });
+    // document.getElementById("enemy-score").innerHTML = allEnemies[0].score;
     this.reset();
     clock.resetGame();
 };
@@ -190,6 +186,19 @@ Game.prototype.createEnemyBasedOnGameLevel = function(gameLevel) {
         
     }
 };
+
+Game.prototype.addPlayerScore = function() {
+    player.score ++;
+    document.getElementById("player-score").innerHTML = player.score;
+}
+
+Game.prototype.addEnemyScore = function() {
+    allEnemies.forEach(function(enemy) {
+        enemy.score++;
+        enemy.generateInitialPosistion();
+    });
+    document.getElementById("enemy-score").innerHTML = allEnemies[0].score;
+}
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
