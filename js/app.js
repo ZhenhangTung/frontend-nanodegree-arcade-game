@@ -177,10 +177,10 @@ Game.prototype.createEnemyBasedOnGameLevel = function(gameLevel) {
         allEnemies = [new Enemy('images/pidgey.png')];
         break;
         case 'nomal':
-        console.log(222);
         allEnemies = [new Enemy('images/jigglypuff.png'), new Enemy('images/pidgey.png'), new Enemy('images/psyduck.png')];
         // console.log(allEnemies);
         break;
+        case 'hard':
         allEnemies = [new Enemy('images/jigglypuff.png'), new Enemy('images/pidgey.png'), new Enemy('images/psyduck.png'), new Enemy('images/eevee.png'), new Enemy('images/charmander.png'),];
         break;
         case 'hell':
