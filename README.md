@@ -8,9 +8,12 @@ You use keyboard 'up' 'down' 'left' and 'right' to control your Pockemon to avoi
 
 There is a scoreboard to record your score.
 
-Click the Pockemon ball to start your game. Go!
+# Steps to run this game.
+* Open ths project folder, then open the index.html file.
+* Choose a game level you want to play with.
+* Click the Pockemon ball to start your game. Go!
+* If you lose the game, just click the cute Pikachu to battle again.
 
-# 
 
 # Targets needed to be finished
 * Make pages more beautiful
